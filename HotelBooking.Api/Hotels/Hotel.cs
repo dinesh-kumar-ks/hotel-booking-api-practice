@@ -7,12 +7,14 @@ namespace HotelBooking.Api.Hotels
     {
         public readonly string HotelName;
 
-        public IReadOnlyList<Room> rooms;
+        public IReadOnlyList<Room> Rooms;
 
-        public IReadOnlyList<IBookingPolicy> bookingPolicies;
-        public Hotel(string name)
+        public IReadOnlyList<IBookingPolicy> BookingPolicies;
+        public Hotel(string name, IReadOnlyList<Room> rooms, IReadOnlyList<IBookingPolicy> bookingPolicies)
         {
             HotelName = name;
+            Rooms = rooms;
+            BookingPolicies = bookingPolicies;
         }
     }
 }

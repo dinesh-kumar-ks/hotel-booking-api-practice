@@ -7,10 +7,12 @@ public class Booking
 {
     private bool _pricePaid { get; set; }
     private Hotel  _hotel;
-    public Booking(Hotel hotel, bool pricePaid)
+    private Room _room;
+    public Booking(Hotel hotel, bool pricePaid, Room room)
     {
         _hotel = hotel; 
         _pricePaid = pricePaid;
+        _room = room;
     }
 
 
@@ -25,7 +27,7 @@ public class Booking
             return response;
         }
 
-        foreach(IBookingPolicy policy in _hotel.bookingPolicies)
+        foreach(IBookingPolicy policy in _hotel.BookingPolicies)
         {
             if(!policy.IsAllowed(request))
             {
@@ -35,15 +37,11 @@ public class Booking
             }
         }
 
-
-        foreach (Room room in _hotel.rooms)
+        if(!_room.CheckRoomAvailablity())
         {
-            if(!room.CheckRoomAvailablity())
-            {
-                response.IsBooked = false;
-                response.ErrorMessage = "Requested Room isn't available";
-                return response;
-            }
+            response.IsBooked = false;
+            response.ErrorMessage = "Requested Room isn't available";
+            return response;
         }
 
         response.IsBooked = true;

@@ -28,26 +28,28 @@ app.MapControllers();
 
 
 //temp: prove polymorphism
-Hotel hotel = new Hotel("Hotel Das");
 Room standardRoom = new StandardRoom(250);
 Room suiteRoom = new SuiteRoom(400);
 List<Room> rooms = new List<Room>();
 rooms.Add(standardRoom);
 rooms.Add(suiteRoom);
-hotel.rooms = rooms;
+
+
+
+BookingRequest request = new BookingRequest(6, 2);
+
+List<IBookingPolicy> policies = new List<IBookingPolicy>() { new MaxBookingPolicy(6), new MinimumStayPolicy(2) };
+
+
+Hotel hotel = new Hotel("Hotel Das", rooms, policies);
 
 Console.WriteLine("Name: " + hotel.HotelName);
-foreach(var room in hotel.rooms)
+foreach (var room in hotel.Rooms)
 {
     Console.WriteLine($"Type: {room.RoomType}, Price: {room.CalculateRoomPrice()}");
 }
 
-BookingRequest request = new BookingRequest(6, 2);
-
-List<IBookingPolicy> policies = new List<IBookingPolicy>() { new MaxBookingPolicy(2), new MinGuestPolicy(2) };
-hotel.bookingPolicies = policies;
-
-foreach(IBookingPolicy policy in policies)
+foreach (IBookingPolicy policy in hotel.BookingPolicies)
 {
     Console.WriteLine($"Policy: {policy.GetType().Name}, {policy.IsAllowed(request)}");
 }
