@@ -9,7 +9,7 @@
             RoomType = type;
         }
 
-        public abstract double calculateRoomPrice();
-        public abstract bool checkRoomAvailablity();
+        public abstract decimal CalculateRoomPrice();
+        public abstract bool CheckRoomAvailablity();
     }
 }

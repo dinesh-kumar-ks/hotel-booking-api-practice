@@ -1,5 +1,5 @@
 ﻿using HotelBooking.Api.Rooms;
-using HotelBooking.Api.Booking;
+using HotelBooking.Api.Bookings;
 
 namespace HotelBooking.Api.Hotels
 {
@@ -7,9 +7,9 @@ namespace HotelBooking.Api.Hotels
     {
         public readonly string HotelName;
 
-        public Room room;
+        public IReadOnlyList<Room> rooms;
 
-        public BookingPolicy bookingPolicy;
+        public IReadOnlyList<IBookingPolicy> bookingPolicies;
         public Hotel(string name)
         {
             HotelName = name;

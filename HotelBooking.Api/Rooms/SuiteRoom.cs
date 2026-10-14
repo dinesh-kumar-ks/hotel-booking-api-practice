@@ -2,18 +2,18 @@
 {
     public class SuiteRoom: Room 
     {
-        private const double roomPrice = 400.0;
-        public SuiteRoom(): base(RoomType.SuiteRoom)
+        private readonly decimal _roomPrice;
+        public SuiteRoom(decimal price): base(RoomType.SuiteRoom)
         {
-            
+            _roomPrice = price;
         }
 
-        public override double calculateRoomPrice()
+        public override decimal CalculateRoomPrice()
         {
-            return roomPrice;
+            return _roomPrice;
         }
 
-        public override bool checkRoomAvailablity()
+        public override bool CheckRoomAvailablity()
         {
             return true;
         }
